@@ -5,8 +5,9 @@ from flask_restplus import Resource
 from util.crypt import validate_token, make_hashed_password
 
 class User(Resource):
-    def get(self, user_id):
+    def get(self, user_id=None):
         auth_user_id = validate_token()
+        if auth_user_id != user_id: abort(400)
         this_user = model.User.query.get(auth_user_id)
         if this_user is None: abort(404)
         this_user_dict = this_user.to_dict()

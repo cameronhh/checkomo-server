@@ -12,10 +12,7 @@ class Token(Resource):
 
     def post(self):
         data = request.get_json(force=True)
-        this_user = ( 
-            #model.User.query.filter_by(username=data.get("username")).first() 
-            model.User.query.filter_by(email=data.get("email")).first()
-        )
+        this_user = model.User.query.filter_by(email=data.get("email")).first()
         # abort if not valid user
         if this_user is None: abort(403)
         # abort if password wrong/None

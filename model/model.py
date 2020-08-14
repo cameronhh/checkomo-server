@@ -80,10 +80,9 @@ class User(db.Model,SerializerMixin):
 
     def to_dict(self):
         is_registered = True if self.token_register is None else False
-        d = super.to_dict()
+        d = super(User, self).to_dict()
         del d["token_register"]
         del d["token_password_reset"]
-        del d["password"]
         d["is_registered"] = is_registered
         return d
     
