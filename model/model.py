@@ -5,6 +5,7 @@ import uuid
 
 class Venue(db.Model,SerializerMixin):
     __tablename__ = 'venue'
+
     
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(256), nullable=False)
@@ -14,12 +15,14 @@ class Venue(db.Model,SerializerMixin):
 # schedules for making new codes
 class VenueCodeTemplate(db.Model,SerializerMixin):
     __tablename__ = 'venue_code_template'
+
     id = db.Column(db.Integer(), primary_key=True)
     # TODO: make this table 
 
 # codes created by a venue - i.e. checkomo/venue/code
 class VenueCode(db.Model,SerializerMixin):
     __tablename__ = 'venue_code'
+
     #id's
     id = db.Column(db.String(64), primary_key=True, default=uuid.uuid4)
     venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'),nullable=False)
@@ -37,6 +40,7 @@ class VenueCode(db.Model,SerializerMixin):
 
 class Visit(db.Model,SerializerMixin):
     __tablename__ = 'visit'
+
     # id's
     clustered_id = db.Column(db.Integer(), primary_key=True) # this only exists for performance reasons
     id = db.Column(db.String(64), nullable=False, default=uuid.uuid4)
@@ -61,6 +65,7 @@ class Visit(db.Model,SerializerMixin):
 #not needed yet
 class User(db.Model,SerializerMixin):
     __tablename__ = 'user'
+
     # id
     id = db.Column(db.Integer(), primary_key=True)
     # details
@@ -89,11 +94,13 @@ class User(db.Model,SerializerMixin):
 
 class VenueUser(db.Model,SerializerMixin):
     __tablename__ = 'venue_user'
+
     venue_id = db.Column(db.Integer(), db.ForeignKey('venue.id'), primary_key=True)
     user_id = db.Column(db.Integer(), db.ForeignKey('user.id'), primary_key=True)
     is_admin = db.Column(db.Boolean())
 
 class Settings(db.Model,SerializerMixin):
     __tablename__ = 'settings'
+
     setting_key = db.Column(db.String(30), primary_key=True)
     setting_value = db.Column(db.String(2048), nullable=True)
