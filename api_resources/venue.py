@@ -22,7 +22,7 @@ class Venue(Resource):
 
     def post(self):
         #abort(403)
-        user_id = 1#validate_token()
+        user_id = validate_token()
         if user_id is None: abort(401)
         data = request.get_json(force=True)
 
