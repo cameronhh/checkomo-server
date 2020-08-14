@@ -30,7 +30,7 @@ class User(Resource):
         this_user = model.User(
             contact_number = contact_number,
             email = email,
-            username = username,
+            # username = username,
             password = password
         )
 
