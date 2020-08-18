@@ -11,13 +11,15 @@ class Venue(Resource):
 
         # get single venue
         if venue_id and not user_id:
-            venue = model.Venue.query.get(venue_id).to_dict()
+            venue = model.Venue.query.get(venue_id)
+            if venue is None: abort(404)
+            venue = venue.to_dict()
         # get all vanues for a user
         if user_id and not venue_id:
             venue = model.Venue.query.join(model.VenueUser).join(model.User).filter(model.User.id == user_id).all()
             venue = [r.to_dict() for r in venue]
         
-        if venue is None: abort(404)
+        
         return jsonify(venue)
 
     def post(self):

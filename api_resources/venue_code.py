@@ -11,8 +11,9 @@ class VenueCode(Resource):
         user_id = validate_token()
         data = request.get_json(force=True)
 
+        if model.Venue.query.get(venue_id) is None: abort(404)
         if not model.User.authedto_venue(user_id,venue_id): abort(403)
-        
+
         venue_code_template_id = None # this should only be set if created from a template, NI yet
         code = data.get("code")
         name = data.get("name")
