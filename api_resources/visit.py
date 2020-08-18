@@ -23,6 +23,7 @@ class Visit(Resource):
             max_records = request.args.get("max_records") or None
 
             # visit can be linked via venue code or directly to venue
+            # thomas had never seen such a mess
             q_by_venue_code = model.Visit.query.join(model.VenueCode).join(model.Venue).filter(model.Venue.id==venue_id)
             q_by_venue_id = model.Visit.query.join(model.Venue).filter(model.Venue.id==venue_id)
             q = q_by_venue_code.union(q_by_venue_id)
@@ -63,6 +64,12 @@ class Visit(Resource):
         phone = data.get("phone")
         email = data.get("email")
         address = data.get("address")
+
+        this_venue_code = model.VenueCode.query.get(venue_code_id)
+        if (this_venue_code.start_dttm is not None and  datetime.now() < this_venue_code.start_dttm):
+            abort(400, "venue_code_too_new")
+        elif (this_venue_code.end_dttm is not None and  datetime.now() > this_venue_code.end_dttm):
+            abort(400, "venue_code_too_old")
 
         # only
         if venue_code_id is None:

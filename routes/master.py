@@ -12,7 +12,7 @@ api.add_resource(User,
 )
 
 api.add_resource(Visit,
-    '/api/use',
+    '/api/visit',
     '/api/visit/<string:visit_id>',
     '/api/venue/<int:venue_id>/visit',
     '/api/venue/<int:venue_id>/venuecode/<string:venue_code_id>/visit'
