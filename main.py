@@ -10,9 +10,9 @@ import model.model
 # load routes
 import routes.master
 
-if __name__ == "__main__":
-    cors = CORS(app)
+cors = CORS(app)
 
+if __name__ == "__main__":
     app.run(
         debug=config["use_debug"],
         use_reloader=True,
