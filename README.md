@@ -1,3 +1,5 @@
+**_This project is no longer active._**
+
 # Server - Checkomo
 A REST API server for Checkomo - a QR Code Check-In Application
 
